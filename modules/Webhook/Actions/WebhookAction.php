@@ -1,13 +1,20 @@
 <?php
 
-namespace App\Actions;
+namespace Modules\Webhook\Actions;
 
-use App\Http\Requests\WebhookRequest;
 use App\Models\Transaction;
 use Illuminate\Http\JsonResponse;
+use Modules\Webhook\Http\Requests\WebhookRequest;
 
 class WebhookAction
 {
+    protected Transaction $transactionModel;
+
+    public function __construct(Transaction $transactionModel)
+    {
+        $this->transactionModel = $transactionModel;
+    }
+
     /**
      * Handle the webhook request.
      *
@@ -21,7 +28,7 @@ class WebhookAction
         $status = $webhookRequest->status;
 
         // Find the transaction by ID
-        $transaction = Transaction::where('exchange_charge_id', $chargeId)->first();
+        $transaction = $this->transactionModel->where('exchange_charge_id', $chargeId)->first();
 
         if (!$transaction) {
             return response()->json(['message' => 'Transaction not found'], 404);

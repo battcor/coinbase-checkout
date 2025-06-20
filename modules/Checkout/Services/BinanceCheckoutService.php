@@ -1,30 +1,32 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Checkout\Services;
 
-use App\Interfaces\CheckoutServiceInterface;
 use Illuminate\Support\Facades\Log;
+use Modules\Checkout\Interfaces\CheckoutServiceInterface;
 
-class CoinbaseCheckoutService extends CoinbaseExchangeService implements CheckoutServiceInterface
+class BinanceCheckoutService extends ExchangeService implements CheckoutServiceInterface
 {
+    protected const EXCHANGE_NAME = 'binance';
+
     /**
      * @inheritDoc
      */
     public function checkout(float $amount): string
     {
         try {
-            // call Coinbase API to create a checkout session
+            // call Binance API to create a checkout session
             $response = $this->apiClient->send([
                 'amount' => $amount,
                 'description' => 'Test transaction',
             ]);
 
             if (empty($response['id'])) {
-                throw new \Exception('Empty id response from Coinbase API');
+                throw new \Exception('Empty id response from Binance API');
             }
             return $response['id'];
         } catch (\Throwable $th) {
-            Log::error('Coinbase API call failed: ' . $th->getMessage());
+            Log::error('Binance API call failed: ' . $th->getMessage());
             throw $th;
         }
     }

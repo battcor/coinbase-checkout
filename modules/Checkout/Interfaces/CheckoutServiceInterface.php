@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace Modules\Checkout\Interfaces;
 
 interface CheckoutServiceInterface extends ExchangeServiceInterface
 {

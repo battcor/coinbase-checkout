@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email', length: 100);
             $table->decimal('amount', 10, 2);
             $table->string('exchange', length: 8);
-            $table->string('exchange_charge_id', length: 10);
+            $table->string('exchange_charge_id', length: 36);
             $table->integer('status')->comment('0: failed, 1: successful, 2: pending');
 
             $table->timestamps();

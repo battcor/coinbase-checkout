@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Actions;
+namespace Modules\Checkout\Actions;
 
-use App\Http\Requests\CheckoutRequest;
-use App\Http\Resources\TransactionResource;
-use App\Interfaces\CheckoutServiceInterface;
 use App\Models\Transaction;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Checkout\Http\Requests\CheckoutRequest;
+use Modules\Checkout\Http\Resources\TransactionResource;
+use Modules\Checkout\Interfaces\CheckoutServiceInterface;
 
 class CheckoutAction
 {
+    protected Transaction $transactionModel;
+
+    public function __construct(Transaction $transactionModel)
+    {
+        $this->transactionModel = $transactionModel;
+    }
+
     /**
      * Handle the checkout process.
      *
@@ -24,7 +31,7 @@ class CheckoutAction
         $chargeId = $checkoutService->checkout($amount);
 
         // Store the initial transaction as pending
-        $transaction = Transaction::create([
+        $transaction = $this->transactionModel->create([
             'email' => $email,
             'amount' => $amount,
             'exchange' => $checkoutService->getExchangeName(),

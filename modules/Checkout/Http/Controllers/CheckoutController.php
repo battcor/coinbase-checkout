@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Checkout\Http\Controllers;
 
-use App\Http\Requests\CheckoutRequest;
-use App\Interfaces\CheckoutServiceInterface;
-use App\Actions\CheckoutAction;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Checkout\Actions\CheckoutAction;
+use Modules\Checkout\Http\Requests\CheckoutRequest;
+use Modules\Checkout\Interfaces\CheckoutServiceInterface;
 
 class CheckoutController extends Controller
 {

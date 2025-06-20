@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Webhook\Http\Controllers;
 
-use App\Actions\WebhookAction;
-use App\Http\Requests\WebhookRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Modules\Webhook\Actions\WebhookAction;
+use Modules\Webhook\Http\Requests\WebhookRequest;
 
 class WebhookController extends Controller
 {

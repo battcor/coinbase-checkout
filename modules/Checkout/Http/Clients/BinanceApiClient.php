@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Clients;
+namespace Modules\Checkout\Http\Clients;
 
-use App\Interfaces\ApiClientInterface;
 use Illuminate\Support\Str;
+use Modules\Checkout\Interfaces\ApiClientInterface;
 
 /**
- * Class CoinbaseApiClient
+ * Class BinanceApiClient
  *
- * This class simulates the behavior of a Coinbase API client for testing purposes.
+ * This class simulates the behavior of a Binance API client for testing purposes.
  * It generates a fake hosted payment URL and charge ID.
  */
-class CoinbaseApiClient implements ApiClientInterface
+class BinanceApiClient implements ApiClientInterface
 {
     /**
      * @inheritDoc
@@ -20,7 +20,7 @@ class CoinbaseApiClient implements ApiClientInterface
     {
         // mock the response to simulate a successful API call
         return [
-            'id' => Str::random(10),
+            'id' => Str::uuid(),
         ];
     }
 }
